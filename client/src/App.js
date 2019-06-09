@@ -22,8 +22,11 @@ class App extends Component {
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      if(window.location.pathname.length > 1){
-        const id = window.location.pathname.replace("/", "")
+      const urlname = window.location.pathname
+      const url_array = urlname.split("/")
+      const len = url_array.length
+        const id = url_array[len - 1]
+        if(id.length > 0){
         instance.methods.getLink(id).call().then((response) => {
           window.location = "http://" + response[1]
         })
@@ -82,7 +85,7 @@ class App extends Component {
             {
               this.state.short_url &&
               <p>
-                Short url is <a href={this.state.short_url} target="_blank" > {this.state.short_url} </a>
+                Short url is <a href={this.state.short_url} rel="noopener noreferrer" target="_blank" > {this.state.short_url} </a>
               </p>
             }
 

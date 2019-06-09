@@ -3,8 +3,6 @@
 Short link for your long url which always work, it is build upon blockchain therefore
 does not depend on central server.
 
-This React Application which will interact with blockchain from browser.
-
 ## Installation
 
 1. Clone this Repository
