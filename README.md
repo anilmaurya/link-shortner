@@ -48,7 +48,10 @@ does not depend on central server.
     // ensure you are inside the client directory when running this
     npm run build
     ```
-
+8. Deployment on github
+    ```
+    npm run deploy
+    ```
 ## FAQ
 
 * __How do I use this with the Ganache-CLI?__

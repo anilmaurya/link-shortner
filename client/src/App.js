@@ -22,11 +22,8 @@ class App extends Component {
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      const urlname = window.location.pathname
-      const url_array = urlname.split("/")
-      const len = url_array.length
-        const id = url_array[len - 1]
-        if(id.length > 0){
+      const id = window.location.search.replace("?", "")
+      if(id.length > 0){
         instance.methods.getLink(id).call().then((response) => {
           window.location = "http://" + response[1]
         })
@@ -59,7 +56,7 @@ class App extends Component {
     const _this = this
     contract.events.LinkAdded({}, function(){
       contract.methods.getLastLink().call().then((response) => {
-        _this.setState({short_url: window.location.href + response[2].toNumber()})
+        _this.setState({short_url: window.location.href + '?' + response[2].toNumber()})
       })
     })
 
