@@ -15,16 +15,21 @@ contract LinkShortner {
 		lastLinkId = 0;
 	}
 
-  function createNewLink(string memory url) public returns (uint) {
+  function createNewLink(string memory url) public returns (uint, string memory) {
 	  lastLinkId++;
 		linkMapping[lastLinkId] = LinkTemplate(msg.sender, url);
     emit LinkAdded(lastLinkId, url);
-		return lastLinkId;
+		return(lastLinkId, url);
 	}
 
   function getLink(uint linkId) public view returns(address, string memory) {
 		LinkTemplate memory link = linkMapping[linkId];
 		return(link.userAddress, link.url);
+	}
+
+  function getLastLink() public view returns(address, string memory, uint) {
+		LinkTemplate memory link = linkMapping[lastLinkId];
+		return(link.userAddress, link.url, lastLinkId);
 	}
 
 }

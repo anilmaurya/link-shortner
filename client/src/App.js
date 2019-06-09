@@ -5,7 +5,7 @@ import getWeb3 from "./utils/getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { storageValue: 0, web3: null, accounts: null, contract: null, loading: true };
 
   componentDidMount = async () => {
     try {
@@ -22,10 +22,18 @@ class App extends Component {
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
+      if(window.location.pathname.length > 1){
+        const id = window.location.pathname.replace("/", "")
+        instance.methods.getLink(id).call().then((response) => {
+          window.location = "http://" + response[1]
+        })
+      }else{
+        this.setState({loading: false})
+      }
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance }, this.listenEvent);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -34,22 +42,23 @@ class App extends Component {
       console.error(error);
     }
   };
-
-  runExample = async () => {
+  submit = () => {
     const { accounts, contract } = this.state;
+    contract.methods.createNewLink(this.state.url).send({ from: accounts[0] })
+  }
 
-    contract.methods.createNewLink("https://googleapi.com").send({ from: accounts[0] }, (response) => {
-      console.log(response)
-      //  contract.methods.get().call().then((response) => {
-      //    this.setState({ storageValue: response.toNumber() });
-      //  })
-      // contract.methods.on("LinkAdded", (linkId, linkUrl) => {
-      //   console.log('link added')
-      //   console.log(linkId)
-      //   console.log(linkUrl)
-      // })
-      }
-    )
+  updateUrl = (e) => {
+    this.setState({url: e.target.value})
+  }
+
+  listenEvent = async () => {
+    const { contract } = this.state;
+    const _this = this
+    contract.events.LinkAdded({}, function(){
+      contract.methods.getLastLink().call().then((response) => {
+        _this.setState({short_url: window.location.href + response[2].toNumber()})
+      })
+    })
 
 
   };
@@ -60,17 +69,25 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 40</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+        {
+          !this.state.loading &&
+          <>
+            <h1>Link Shortner</h1>
+            <p>Build on Blockchain using Smart Contract.</p>
+            <h3>Enter url</h3>
+            <p>
+              <input name="url" val={this.state.url} onChange={this.updateUrl}/>
+            </p>
+            <button onClick={this.submit}>Submit</button>
+            {
+              this.state.short_url &&
+              <p>
+                Short url is <a href={this.state.short_url} target="_blank" > {this.state.short_url} </a>
+              </p>
+            }
+
+          </>
+        }
       </div>
     );
   }
