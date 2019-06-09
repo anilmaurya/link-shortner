@@ -25,7 +25,11 @@ class App extends Component {
       const id = window.location.search.replace("?", "")
       if(id.length > 0){
         instance.methods.getLink(id).call().then((response) => {
-          window.location = "http://" + response[1]
+          if(response[1].includes('http')){
+            window.location = response[1]
+          }else{
+            window.location = "http://" + response[1]
+          }
         })
       }else{
         this.setState({loading: false})
