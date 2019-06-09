@@ -1,21 +1,15 @@
-### Problem Statement:
+### Link Shortner
 
-Government releases Tender for work, companies bid to get work. There is possibility of manipulating bid from back-end system.
-
-### Solution:
-
-This application which will store Tender & Bid on Blockchain then using Smart Contract decide which company win bidding.
-
-### Approach
+Short link for your long url which always work, it is build upon blockchain therefore
+does not depend on central server.
 
 This React Application which will interact with blockchain from browser.
-
 
 ## Installation
 
 1. Clone this Repository
    ```js
-   git clone git@github.com:anilmaurya/d-tender.git
+   git clone git@github.com:anilmaurya/link-shortner.git
    ```
 
 2. Run the development console.

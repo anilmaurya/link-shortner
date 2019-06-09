@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import SimpleStorageContract from "./contracts/LinkShortner.json";
 import getWeb3 from "./utils/getWeb3";
 
 import "./App.css";
@@ -38,13 +38,19 @@ class App extends Component {
   runExample = async () => {
     const { accounts, contract } = this.state;
 
-    // Stores a given value, 5 by default.
-    contract.methods.set(5).send({ from: accounts[0] }, () => {
-       contract.methods.get().call().then((response) => {
-         this.setState({ storageValue: response.toNumber() });
-       })
+    contract.methods.createNewLink("https://googleapi.com").send({ from: accounts[0] }, (response) => {
+      console.log(response)
+      //  contract.methods.get().call().then((response) => {
+      //    this.setState({ storageValue: response.toNumber() });
+      //  })
+      // contract.methods.on("LinkAdded", (linkId, linkUrl) => {
+      //   console.log('link added')
+      //   console.log(linkId)
+      //   console.log(linkUrl)
+      // })
       }
     )
+
 
   };
 
