@@ -1,7 +1,6 @@
 ### Link Shortner
 
-Short link for your long url which always work, it is build upon blockchain therefore
-does not depend on central server.
+Gives you short link for long url, it is build upon blockchain therefore does not depend on central server.
 
 ## Installation
 
