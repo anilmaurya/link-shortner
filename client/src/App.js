@@ -78,11 +78,11 @@ class App extends Component {
           <>
             <h1>Link Shortner</h1>
             <p>Build on Blockchain using Smart Contract.</p>
-            <h3>Enter url</h3>
+            <h3>Enter Url</h3>
             <p>
-              <input name="url" val={this.state.url} onChange={this.updateUrl}/>
+              <input name="url" val={this.state.url} onChange={this.updateUrl} className="input_style"/>
             </p>
-            <button onClick={this.submit}>Submit</button>
+            <button onClick={this.submit} className="submit_style">Submit</button>
             {
               this.state.short_url &&
               <p>
