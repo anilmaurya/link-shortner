@@ -13,7 +13,7 @@ end
 class Contract
   def initialize
     @client = Ethereum::HttpClient.new("https://ropsten.infura.io/v3/ebcc6fb682fd49a589e84d8a2360cbf0")
-    contract_json = JSON.parse(File.read('../client/src/contracts/LinkShortner.json'))
+    contract_json = JSON.parse(File.read('LinkShortner.json'))
     @contract_abi = contract_json['abi']
     @address = contract_json["networks"]["3"]["address"]
     @client.default_account = "0x3b8B0b23C4850FA8289da815a6abEE4Fc2DF941A"
