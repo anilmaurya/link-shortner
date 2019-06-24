@@ -11,7 +11,8 @@ class App extends Component {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
+      console.log('after web3')
+      console.log(web3)
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
 
@@ -40,10 +41,22 @@ class App extends Component {
       this.setState({ web3, accounts, contract: instance }, this.listenEvent);
     } catch (error) {
       // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
-      console.error(error);
+      const id = window.location.search.replace("?", "")
+      if(id.length > 0){
+        fetch("https://shielded-sierra-31512.herokuapp.com/url?id="+id).then((response) => {
+          console.log(response)
+          // if(response[1].includes('http')){
+          //   window.location = response[1]
+          // }else{
+          //   window.location = "http://" + response[1]
+          // }
+        })
+      }else{
+        alert(
+          `Failed to load web3, accounts, or contract. Check console for details.`,
+        );
+        console.error(error);
+      }
     }
   };
   submit = () => {

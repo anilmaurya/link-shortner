@@ -49,8 +49,17 @@ Gives you short link for long url, it is build upon blockchain therefore does no
     ```
 8. Deployment on github
     ```
+    cd client
     npm run deploy
     ```
+9. Deploy api
+   ```
+   heroku create
+   heroku buildpacks:set https://github.com/timanovsky/subdir-heroku-buildpack
+   heroku buildpacks:add heroku/ruby
+   heroku config:set PROJECT_PATH=backend
+   git push heroku master
+   ```
 ## FAQ
 
 * __How do I use this with the Ganache-CLI?__

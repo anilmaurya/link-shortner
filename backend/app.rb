@@ -33,4 +33,12 @@ class App < Sinatra::Base
   get '/url' do
     return {url: Contract.new.result(params[:id])}.to_json
   end
+
+  options "*" do
+    response.headers["Allow"] = "HEAD,GET,PUT,DELETE,OPTIONS"
+
+    # Needed for client app
+    response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+    halt :ok
+  end
 end
