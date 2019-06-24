@@ -31,6 +31,7 @@ class Contract
 end
 class App < Sinatra::Base
   get '/url' do
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return {url: Contract.new.result(params[:id])}.to_json
   end
 
