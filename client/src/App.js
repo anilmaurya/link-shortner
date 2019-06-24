@@ -44,12 +44,14 @@ class App extends Component {
       const id = window.location.search.replace("?", "")
       if(id.length > 0){
         fetch("https://shielded-sierra-31512.herokuapp.com/url?id="+id).then((response) => {
-          console.log(response)
-          // if(response[1].includes('http')){
-          //   window.location = response[1]
-          // }else{
-          //   window.location = "http://" + response[1]
-          // }
+          return response.json();
+        }).then((response) => {
+          const url = response.url
+          if(url.includes('http')){
+            window.location = url
+          }else{
+            window.location = "http://" + url
+          }
         })
       }else{
         alert(
