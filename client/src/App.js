@@ -55,9 +55,9 @@ class App extends Component {
           }
         })
       }else{
-        alert(
-          `Failed to load web3, accounts, or contract. Check console for details.`,
-        );
+        if(window.confirm('Web3 Not detected, you will be redirected to metamask. Install metamask before using LinkShortner')){
+          window.location.href='https://metamask.io/';
+        };
         console.error(error);
       }
     }
@@ -85,7 +85,7 @@ class App extends Component {
 
   render() {
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      return <div>Loading Web3 ...</div>;
     }
     return (
       <div className="App">
