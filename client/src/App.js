@@ -5,7 +5,8 @@ import getWeb3 from "./utils/getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null, loading: true };
+  state = { storageValue: 0, web3: null, accounts: null, contract: null, loading: true,
+            showloader: false};
 
   componentDidMount = async () => {
     try {
@@ -64,6 +65,7 @@ class App extends Component {
   submit = () => {
     const { accounts, contract } = this.state;
     contract.methods.createNewLink(this.state.url).send({ from: accounts[0] })
+    this.setState({showloader: true})
   }
 
   updateUrl = (e) => {
@@ -76,10 +78,9 @@ class App extends Component {
     contract.events.LinkAdded({}, function(){
       contract.methods.getLastLink().call().then((response) => {
         _this.setState({short_url: window.location.href + '?' + response[2].toNumber()})
+        _this.setState({showloader: false})
       })
     })
-
-
   };
 
   render() {
@@ -98,6 +99,13 @@ class App extends Component {
               <input name="url" val={this.state.url} onChange={this.updateUrl} className="input_style"/>
             </p>
             <button onClick={this.submit} className="submit_style">Submit</button>
+            { this.state.showloader &&
+              <p>
+                <label> Waiting for transaction confirmation on Blockchain </label>
+                <br></br>
+                <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              </p>
+            }
             {
               this.state.short_url &&
               <p>
