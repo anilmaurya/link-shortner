@@ -60,12 +60,15 @@ For example: https://anilmaurya.github.io/link-shortner/?12
     // ensure you are inside the client directory when running this
     npm run build
     ```
-8. Deployment on github
+ 
+## Deployment
+
+1. Deploy client App on github
     ```
     cd client
     npm run deploy
     ```
-9. Deploy api
+2. Deploy Api for reading contract on heroku
    ```
    heroku create
    heroku buildpacks:set https://github.com/timanovsky/subdir-heroku-buildpack
@@ -73,6 +76,7 @@ For example: https://anilmaurya.github.io/link-shortner/?12
    heroku config:set PROJECT_PATH=backend
    git push heroku master
    ```
+
 ## FAQ
 
 * __How do I use this with the Ganache-CLI?__
