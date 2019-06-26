@@ -2,6 +2,19 @@
 
 Gives you short link for long url, it is build upon blockchain therefore does not depend on central server.
 
+### How to create short url
+
+1. Install Metamask chrome extension
+2. Create account on metamask, change network to Ropsten Test Network.
+3. Get free ether from https://faucet.metamask.io/
+4. Visit https://anilmaurya.github.io/link-shortner/
+
+![Demo](clip.gif)
+### Share short link
+
+Short link created can be shared with everyone without any dependencies on metamask.
+For example: https://anilmaurya.github.io/link-shortner/?12
+
 ## Installation
 
 1. Clone this Repository
