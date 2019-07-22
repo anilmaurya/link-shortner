@@ -60,7 +60,12 @@ For example: https://anilmaurya.github.io/link-shortner/?12
     // ensure you are inside the client directory when running this
     npm run build
     ```
- 
+
+8. Deploying contract on Ropsten network
+  ```
+  truffle migrate --network ropsten
+  ```
+
 ## Deployment
 
 1. Deploy client App on github
