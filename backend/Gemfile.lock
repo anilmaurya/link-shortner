@@ -31,7 +31,7 @@ GEM
       digest-sha3 (~> 1.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    json (1.8.5)
+    json (2.3.0)
     minitest (5.11.3)
     rack (1.6.12)
     rack-protection (1.5.5)
@@ -52,7 +52,7 @@ DEPENDENCIES
   dm-postgres-adapter
   dm-sqlite-adapter
   ethereum.rb
-  json (= 1.8.5)
+  json (= 2.3.0)
   sinatra
 
 BUNDLED WITH
